@@ -5,6 +5,20 @@ import numpy
 from scipy import linalg
 import scipy.ndimage
 
+def principal_components(x):
+    flatx = numpy.reshape(x, (x.shape[0], x.shape[1] * x.shape[2] * x.shape[3]))
+    sigma = numpy.dot(flatx.T, flatx) / flatx.shape[1]
+    U, S, V = linalg.svd(sigma)
+    return np.dot(np.dot(U, numpy.diag(1. / numpy.sqrt(S + 10e-7))), U.T)
+
+
+def zca_whitening(x, principal_components):
+    flatx = numpy.reshape(x, (x.size))
+    whitex = numpy.dot(flatx, principal_components)
+    x = numpy.reshape(whitex, (x.shape[0], x.shape[1], x.shape[2]))
+    return x
+    
+
 def transform_matrix_offset_center(matrix, x, y):
     o_x = float(x) / 2 + 0.5
     o_y = float(y) / 2 + 0.5
@@ -12,7 +26,6 @@ def transform_matrix_offset_center(matrix, x, y):
     reset_matrix = numpy.array([[1, 0, -o_x], [0, 1, -o_y], [0, 0, 1]])
     transform_matrix = numpy.dot(numpy.dot(offset_matrix, matrix), reset_matrix)
     return transform_matrix
-
 
 
 def apply_transform(x, 

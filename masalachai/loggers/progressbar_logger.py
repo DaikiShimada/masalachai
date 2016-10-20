@@ -15,7 +15,7 @@ def diff_from_history(now_dict, history_dict, history_len):
         #key = now_dict['type']+'_'+k
         key = k
         diff_dict['diff_'+key] = now_dict[key] - ave_dict[key] if key in ave_dict else 0.0
-        if len(history_dict) > 0 and len(history_dict[k]) > history_len:
+        if history_dict.has_key(k) and len(history_dict[k]) > history_len:
             history_dict[k].pop()
         if k in history_dict:
             history_dict[k].append(now_dict[k])

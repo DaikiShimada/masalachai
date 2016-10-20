@@ -17,10 +17,9 @@ def triplet_preprocess(inp):
     return data
 
 class TripletFeeder(DataFeeder):
-    def __init__(self, data_dict, batchsize=1, shuffle=True, loaderjob=8, buf=200):
+    def __init__(self, data_dict, batchsize=1, shuffle=True, loaderjob=8):
         super(TripletFeeder, self).__init__(data_dict, batchsize, shuffle, loaderjob)
         self.hook_preprocess(triplet_preprocess)
-        self.buf = buf
         self.xa = None
         self.xp = None
         self.xn = None

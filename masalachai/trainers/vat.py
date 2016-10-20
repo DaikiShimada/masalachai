@@ -30,7 +30,7 @@ class VirtualAdversarialTrainer(SupervisedTrainer):
             'activation': chainer.functions.identity}
         }
 
-    def __init__(self, optimizer, logger, train_data_feeders,
+    def __init__(self, optimizer, loggers, train_data_feeders,
                  test_data_feeder, gpu=-1, eps=4.0, xi=0.1, lam=1., pitr=1, norm='kl_d'):
         super(VirtualAdversarialTrainer, self).__init__(
             optimizer, loggers, train_data_feeders,

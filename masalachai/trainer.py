@@ -108,7 +108,7 @@ class Trainer(object):
 
         self.wait_train_data_queues()
         train_res = self.update()
-        for i in six.moves.range(1, int(nitr)):
+        for i in six.moves.range(1, int(nitr+1)):
             # update
             self.wait_train_data_queues()
             train_res = res_dic_add(train_res, self.update())

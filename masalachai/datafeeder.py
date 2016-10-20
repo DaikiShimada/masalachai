@@ -7,10 +7,9 @@ import numpy
 import pandas
 import itertools
 
-
-def from_csv(filename):
+def from_csv(filename, batchsize=1, shuffle=True, loaderjob=8):
     df = pandas.read_csv(fname)
-    return DataFeeder(df.to_dict())
+    return DataFeeder(df.to_dict(), batchsize=batchsize, shuffle=shuffle, loaderjob=loaderjob)
 
 
 def preprocess(preprocess_hooks, data):

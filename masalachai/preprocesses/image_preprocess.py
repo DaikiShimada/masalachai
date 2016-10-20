@@ -2,7 +2,6 @@
 
 import numpy
 
-from scipy import linalg
 import scipy.ndimage
 
 

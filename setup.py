@@ -3,14 +3,22 @@
 from setuptools import setup
 
 pandas_version = 'pandas'
+scipy_version = 'scipy>=0.18.0'
 six_version = 'six>=1.10.0'
-chainer_version = 'chainer>=1.12.0'
+chainer_version = 'chainer>=1.17.0'
 pythonjsonlogger_version = 'python-json-logger'
-install_requires = [ pandas_version, six_version, chainer_version, pythonjsonlogger_version ]
+progressbar_version = 'progressbar2'
+install_requires = [ 
+        pandas_version, 
+        scipy_version, 
+        six_version, 
+        chainer_version, 
+        progressbar_version,
+        pythonjsonlogger_version ]
 
 setup(
         name = 'masalachai',
-        version = '0.4.5',
+        version = '0.5.0',
         packages = ['masalachai',
                     'masalachai.datafeeders',
                     'masalachai.preprocesses',

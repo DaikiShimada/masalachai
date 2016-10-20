@@ -42,7 +42,7 @@ def load(name='mnist.pkl'):
 
 
 if __name__ == '__main__':
-    download()
+    #download()
     train_image_ary = convert_image(train_image)
     test_image_ary = convert_image(test_image)
     train_label_ary = convert_label(train_label)

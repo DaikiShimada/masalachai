@@ -6,7 +6,18 @@ from chainer import serializers
 
 class SnapshotBest(PostTestProcess):
 
-    def __init__(self, model, filename, observed='loss', patience=1, best_only=False):
+    self._serializer = {
+            'hdf5': serializers.save_hdf5,
+            'npz': serializers.save_npz
+            }
+
+    def __init__(self, 
+            model, 
+            filename, 
+            observed='loss', 
+            patience=1, 
+            best_only=False,
+            protocol='hdf5'):
         self.model = model
         self.filename = filename
         self.observed = observed
@@ -14,6 +25,7 @@ class SnapshotBest(PostTestProcess):
         self.iteration = 0
         self.loss = None
         self.best_only = best_only
+        self.serializer = self._serializers[protocol]
         self.previous_file = None
 
 
@@ -24,7 +36,7 @@ class SnapshotBest(PostTestProcess):
         filename = self.filename.format(**self.__dict__)
 
         # dump serialized model
-        serializers.save_npz(filename, self.model)
+        self.serializer(filename, self.model)
 
         # remove old file
         if self.best_only:

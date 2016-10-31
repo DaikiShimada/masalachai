@@ -6,10 +6,10 @@ from chainer import serializers
 
 class SnapshotBest(PostTestProcess):
 
-    self._serializer = {
-            'hdf5': serializers.save_hdf5,
-            'npz': serializers.save_npz
-            }
+    _serializers = {
+        'hdf5': serializers.save_hdf5,
+        'npz': serializers.save_npz
+        }
 
     def __init__(self, 
             model, 

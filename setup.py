@@ -20,10 +20,11 @@ install_requires = [
 
 setup(
         name = 'masalachai',
-        version = '0.5.3',
+        version = '0.5.4',
         packages = ['masalachai',
                     'masalachai.datafeeders',
                     'masalachai.preprocesses',
+                    'masalachai.posttest_processes',
                     'masalachai.trainers',
                     'masalachai.loggers',
                     'masalachai.models',

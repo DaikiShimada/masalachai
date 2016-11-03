@@ -87,7 +87,7 @@ class VirtualAdversarialTrainer(SupervisedTrainer):
             d = vr.grad / xp.sqrt(xp.sum(
                 vr.grad * vr.grad, axis=_axis_tuple(d)[1:], keepdims=True))
         self.r_vadv = chainer.Variable(self.eps * d)
-        q_vadv = chainer.functions.softmax(
-            self.optimizer.target.predictor(x0 + self.r_vadv))
+        q_vadv = self.distance_calculators[self.norm]['activation'](
+                self.optimizer.target.predictor(x0 + self.r_vadv))
         self.lds_loss = self.lam * self.distance_calculators[self.norm]['distance'](p, q_vadv)
         return self.lds_loss

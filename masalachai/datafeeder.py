@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import six
+import copy
 import threading
 import multiprocessing
 import numpy
@@ -57,7 +58,7 @@ class DataFeeder(object):
 
     def get_data_dict_list(self, indexes):
         return [{k: v[i] if getattr(v, '__iter__', False) and len(v) == self.n
-                 else v for k, v in self.data_dict.items()} for i in indexes]
+                 else copy.deepcopy(v) for k, v in self.data_dict.items()} for i in indexes]
 
     def get_data_dict_from_list(self, dict_list):
         return {k: numpy.stack([d[k] for d in dict_list])
